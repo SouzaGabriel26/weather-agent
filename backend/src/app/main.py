@@ -1,6 +1,15 @@
-def main():
-    print("Hello from weather-agent!")
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.routes import router
 
-if __name__ == "__main__":
-    main()
+app = FastAPI(title="Weather Agent")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_methods=["POST"],
+    allow_headers=["Content-Type"],
+)
+
+app.include_router(router)
