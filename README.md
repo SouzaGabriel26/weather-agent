@@ -25,8 +25,9 @@ flowchart LR
 
 ## Demo
 
-[▶ Watch the demo](docs/demo.mp4) — a weather question streaming through the
-tool call, the stub result, and the final answer.
+https://github.com/user-attachments/assets/be84d41d-bd8c-4a69-a9d3-a3dd8fcf9369
+
+a weather question streaming through the tool call, the stub result, and the final answer.
 
 ## Layout
 
