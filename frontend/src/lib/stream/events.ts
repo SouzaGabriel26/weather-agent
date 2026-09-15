@@ -1,6 +1,6 @@
-/** Formato do fio: o StreamEvent como o backend serializa. Só os campos lidos pelo front. */
+/** Wire format: the StreamEvent as serialized by the backend. Only the fields the front reads. */
 
-// Mensagens LangChain (dentro de `data`)
+// LangChain messages (inside `data`)
 
 export interface ToolCall {
   name: string;
@@ -29,7 +29,7 @@ export interface ToolMessage {
   status: "success" | "error";
 }
 
-// Envelope do StreamEvent (astream_events v2)
+// StreamEvent envelope (astream_events v2)
 
 interface BaseEvent {
   name: string;
@@ -61,7 +61,7 @@ const KNOWN_EVENTS: ReadonlySet<string> = new Set<StreamEventType>([
   "on_tool_end",
 ]);
 
-// Fronteira: JSON desconhecido -> StreamEvent tipado (AC-06)
+// Boundary: unknown JSON -> typed StreamEvent (AC-06)
 
 export class UnknownStreamEventError extends Error {
   constructor(public readonly eventType: string) {

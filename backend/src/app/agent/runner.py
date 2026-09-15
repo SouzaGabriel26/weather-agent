@@ -9,7 +9,7 @@ _graph = build_graph()
 
 
 async def execute(message: str) -> AsyncIterator[dict[str, Any]]:
-    """Roda o grafo e emite os eventos do stream."""
+    """Run the graph and emit its stream events."""
     async for event in _graph.astream_events(
         {"messages": HumanMessage(message)},
         version="v2",

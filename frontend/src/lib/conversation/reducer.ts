@@ -1,4 +1,4 @@
-/** Aplica os StreamEvents ao estado da conversa (AC-07: concatena, substitui no end, separa). */
+/** Applies StreamEvents to the conversation state (AC-07: concatenate, replace on end, keep apart). */
 
 import type { StreamEvent } from "@/lib/stream/events";
 
@@ -129,7 +129,7 @@ function applyEvent(turn: AssistantTurn, event: StreamEvent): AssistantTurn {
       );
 
     default: {
-      // Exaustivo em compile-time: evento novo na union quebra aqui.
+      // Exhaustive at compile time: a new event in the union fails here.
       const unreachable: never = event;
       throw new Error(
         `Unhandled stream event: ${JSON.stringify(unreachable)}`,

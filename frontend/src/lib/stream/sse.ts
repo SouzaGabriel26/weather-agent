@@ -1,4 +1,4 @@
-/** Lê um Response `text/event-stream` e emite blocos `{ event, data }` (data ainda é string). */
+/** Reads a `text/event-stream` Response and yields `{ event, data }` blocks (data is still a string). */
 
 export interface SseMessage {
   event: string;
@@ -21,10 +21,10 @@ export async function* readSse(
       const { value, done } = await reader.read();
       if (done) break;
 
-      // stream: true segura bytes de um caractere multibyte cortado entre chunks.
+      // stream: true holds back bytes of a multibyte character split across chunks.
       buffer += decoder.decode(value, { stream: true });
 
-      // Só consome blocos completos; o resto fica no buffer para o próximo read().
+      // Only consume complete blocks; the remainder stays buffered for the next read().
       let separator = buffer.indexOf("\n\n");
       while (separator !== -1) {
         const block = buffer.slice(0, separator);

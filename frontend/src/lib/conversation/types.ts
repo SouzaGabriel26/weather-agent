@@ -1,8 +1,8 @@
-/** Modelo da tela. Não espelha o backend — o formato do fio está em `@/lib/stream/events`. */
+/** UI model. Does not mirror the backend — the wire format lives in `@/lib/stream/events`. */
 
 import type { StreamEvent, ToolCall } from "@/lib/stream/events";
 
-// Partes de um turno do assistente (AC-07)
+// Parts of an assistant turn (AC-07)
 
 export interface TextPart {
   kind: "text";
@@ -28,7 +28,7 @@ export interface ToolResultPart {
 
 export type AssistantPart = TextPart | ToolCallPart | ToolResultPart;
 
-// Turnos da conversa
+// Conversation turns
 
 export interface UserTurn {
   id: string;
@@ -44,7 +44,7 @@ export interface AssistantTurn {
 
 export type Turn = UserTurn | AssistantTurn;
 
-// Estado e ações
+// State and actions
 
 export interface ConversationState {
   turns: Turn[];

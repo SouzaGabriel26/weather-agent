@@ -5,14 +5,14 @@ from langchain_core.tools import tool
 
 @tool
 async def get_weather(city: str) -> dict[str, Any]:
-  """Retorna o clima atual de uma cidade.
+  """Return the current weather for a city.
 
-    Use esta ferramenta sempre que o usuário perguntar sobre clima,
-    tempo, temperatura ou condições meteorológicas de algum lugar.
+  Use this tool whenever the user asks about the weather, temperature
+  or conditions in any location.
 
-    Args:
-        city: O nome da cidade, por exemplo "São Paulo".
-    """
+  Args:
+      city: The city name, e.g. "São Paulo".
+  """
   
   await asyncio.sleep(2)
   return {

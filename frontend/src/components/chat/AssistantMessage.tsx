@@ -38,7 +38,7 @@ export function AssistantMessage({
   );
 }
 
-// AC-06: tipo -> renderer. O `never` garante que toda parte tem um.
+// AC-06: kind -> renderer. The `never` default guarantees every part has one.
 function renderPart(part: AssistantPart) {
   switch (part.kind) {
     case "text":

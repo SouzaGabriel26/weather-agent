@@ -1,6 +1,6 @@
 "use client";
 
-/** Liga o gerador de eventos ao reducer da conversa; expõe send/stop/reset. */
+/** Wires the event generator to the conversation reducer; exposes send/stop/reset. */
 
 import { useCallback, useReducer, useRef } from "react";
 
@@ -29,7 +29,7 @@ export function useAgentStream() {
       }
       dispatch({ type: "done" });
     } catch (error) {
-      // Abort é decisão do usuário, não erro: fecha o turno parcial.
+      // Abort is a user decision, not an error: close the partial turn.
       if (controller.signal.aborted) {
         dispatch({ type: "done" });
       } else {

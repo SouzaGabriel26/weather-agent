@@ -61,7 +61,7 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Grão sutil por cima de tudo — dá textura ao fundo chapado. */
+/* Subtle grain overlay so the flat background has some texture. */
 body::before {
   content: "";
   position: fixed;
