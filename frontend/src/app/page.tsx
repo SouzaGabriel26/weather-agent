@@ -1,20 +1,28 @@
 "use client";
 
-import { executeAgent } from "@/lib/agent";
+import { useAgentStream } from "@/hooks/useAgentStream";
 
 export default function Home() {
-  async function run() {
-    for await (const ev of executeAgent("Qual o clima em São Paulo?")) {
-      console.log(ev.event, ev);
-    }
-    console.log("done");
-  }
+  const { turns, status, error, send, stop } = useAgentStream();
 
   return (
-    <main className="p-8">
-      <button onClick={run} className="rounded border px-4 py-2">
-        testar stream
-      </button>
+    <main className="space-y-4 p-8 font-mono text-xs">
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => send("Qual o clima em São Paulo?")}
+          className="rounded border px-3 py-1"
+        >
+          perguntar
+        </button>
+        <button onClick={stop} className="rounded border px-3 py-1">
+          parar
+        </button>
+        <span>status: {status}</span>
+        {error && <span className="text-red-600">{error}</span>}
+      </div>
+      <pre className="whitespace-pre-wrap">
+        {JSON.stringify(turns, null, 2)}
+      </pre>
     </main>
   );
 }
