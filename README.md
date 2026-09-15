@@ -23,6 +23,11 @@ flowchart LR
     Route -. "text/event-stream" .-> Client
 ```
 
+## Demo
+
+[▶ Watch the demo](docs/demo.mp4) — a weather question streaming through the
+tool call, the stub result, and the final answer.
+
 ## Layout
 
 ```
