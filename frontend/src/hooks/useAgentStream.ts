@@ -1,9 +1,11 @@
 "use client";
 
+/** Liga o gerador de eventos ao reducer da conversa; expõe send/stop/reset. */
+
 import { useCallback, useReducer, useRef } from "react";
 
-import { executeAgent } from "@/lib/agent";
-import { conversationReducer, initialConversation } from "@/lib/conversation";
+import { executeAgent } from "@/lib/stream/client";
+import { conversationReducer, initialConversation } from "@/lib/conversation/reducer";
 
 export function useAgentStream() {
   const [state, dispatch] = useReducer(
@@ -27,6 +29,7 @@ export function useAgentStream() {
       }
       dispatch({ type: "done" });
     } catch (error) {
+      // Abort é decisão do usuário, não erro: fecha o turno parcial.
       if (controller.signal.aborted) {
         dispatch({ type: "done" });
       } else {

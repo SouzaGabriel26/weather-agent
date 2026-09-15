@@ -1,3 +1,5 @@
+/** Cliente HTTP do agent: POST /agent/execute -> gerador de StreamEvent validado. */
+
 import { toStreamEvent, type StreamEvent } from "./events";
 import { readSse } from "./sse";
 

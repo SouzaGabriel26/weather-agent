@@ -1,55 +1,13 @@
-import type { StreamEvent, ToolCall } from "./events";
+/** Aplica os StreamEvents ao estado da conversa (AC-07: concatena, substitui no end, separa). */
 
-export interface TextPart {
-  kind: "text";
-  runId: string;
-  content: string;
-  status: "streaming" | "done";
-}
+import type { StreamEvent } from "@/lib/stream/events";
 
-export interface ToolCallPart {
-  kind: "tool_call";
-  runId: string;
-  call: ToolCall;
-}
-
-export interface ToolResultPart {
-  kind: "tool_result";
-  runId: string;
-  name: string;
-  input: Record<string, unknown>;
-  output: string | null;
-  status: "running" | "done" | "error";
-}
-
-export type AssistantPart = TextPart | ToolCallPart | ToolResultPart;
-
-export interface UserTurn {
-  id: string;
-  role: "user";
-  content: string;
-}
-
-export interface AssistantTurn {
-  id: string;
-  role: "assistant";
-  parts: AssistantPart[];
-}
-
-export type Turn = UserTurn | AssistantTurn;
-
-export interface ConversationState {
-  turns: Turn[];
-  status: "idle" | "streaming" | "error";
-  error: string | null;
-}
-
-export type ConversationAction =
-  | { type: "submit"; id: string; content: string }
-  | { type: "event"; event: StreamEvent }
-  | { type: "done" }
-  | { type: "fail"; error: string }
-  | { type: "reset" };
+import type {
+  AssistantPart,
+  AssistantTurn,
+  ConversationAction,
+  ConversationState,
+} from "./types";
 
 export const initialConversation: ConversationState = {
   turns: [],
@@ -171,6 +129,7 @@ function applyEvent(turn: AssistantTurn, event: StreamEvent): AssistantTurn {
       );
 
     default: {
+      // Exaustivo em compile-time: evento novo na union quebra aqui.
       const unreachable: never = event;
       throw new Error(
         `Unhandled stream event: ${JSON.stringify(unreachable)}`,
